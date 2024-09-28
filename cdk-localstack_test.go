@@ -1,26 +1,22 @@
 package main
 
-// import (
-// 	"testing"
+import (
+	stacks "cdk-localstack/stack"
+	"testing"
 
-// 	"github.com/aws/aws-cdk-go/awscdk/v2"
-// 	"github.com/aws/aws-cdk-go/awscdk/v2/assertions"
-// 	"github.com/aws/jsii-runtime-go"
-// )
+	"github.com/aws/aws-cdk-go/awscdk/v2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/assertions"
+	"github.com/aws/jsii-runtime-go"
+)
 
-// example tests. To run these tests, uncomment this file along with the
-// example resource in cdk-localstack_test.go
-// func TestCdkLocalstackStack(t *testing.T) {
-// 	// GIVEN
-// 	app := awscdk.NewApp(nil)
+func TestDataStack(t *testing.T) {
+	app := awscdk.NewApp(nil)
 
-// 	// WHEN
-// 	stack := NewCdkLocalstackStack(app, "MyStack", nil)
+	stack := stacks.DataStack(app, "dataStack", nil)
 
-// 	// THEN
-// 	template := assertions.Template_FromStack(stack, nil)
+	template := assertions.Template_FromStack(stack, nil)
 
-// 	template.HasResourceProperties(jsii.String("AWS::SQS::Queue"), map[string]interface{}{
-// 		"VisibilityTimeout": 300,
-// 	})
-// }
+	template.HasResourceProperties(jsii.String("AWS::SQS::Queue"), map[string]interface{}{
+		"VisibilityTimeout": 300,
+	})
+}

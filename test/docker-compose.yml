@@ -1,0 +1,19 @@
+version: "3.8"
+
+name: cdk-localstack
+
+services:
+  localstack:
+    image: localstack/localstack:3.1.0
+    ports:
+      - "4566:4566"
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LAMBDA_DOCKER_NETWORK=${COMPOSE_PROJECT_NAME}_default
+      - GATEWAY_LISTEN=0.0.0.0:4566
+      - LAMBDA_IGNORE_ARCHITECTURE=1
+      - LAMBDA_KEEPALIVE_MS=0
+      - LAMBDA_RUNTIME_ENVIRONMENT_TIMEOUT=30
+      - ENFORCE_IAM=1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
